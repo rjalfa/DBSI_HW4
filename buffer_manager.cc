@@ -90,8 +90,6 @@ memlocation get_page(unsigned int addr)
 	return pagetable[addr];
 }
 
-
-
 int main(int argc, char* argv[])
 {
 	if(argc < 3) {
