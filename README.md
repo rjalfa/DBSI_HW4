@@ -10,8 +10,9 @@ The code is comprised in two files.
 
 All addresses are assumed to be 1-indexed.
 Format of patterns file: 
-<<Number of accesses(N)>> <<Max Buffer Address>>
-<A1> <A2> ... <AN>
+
+    <<Number of accesses(N)>> <<Max Buffer Address>>
+    <A1> <A2> ... <AN>
 
 Help:
 
