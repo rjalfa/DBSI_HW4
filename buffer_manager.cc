@@ -13,13 +13,18 @@ class memlocation
 {
 	public:
 		unsigned int pageid;
-		unsigned int last_accessed;
+		unsigned long last_accessed;
 		memlocation() : pageid(-1), last_accessed(0) {}
 		memlocation(const memlocation& m) : pageid(m.pageid), last_accessed(m.last_accessed) {}
 		memlocation(unsigned int pageid_p, unsigned int last_accessed_p) : pageid(pageid_p), last_accessed(last_accessed_p) {}
 		bool operator<(const memlocation& a)
 		{	
 			return last_accessed < a.last_accessed;
+		}
+		friend ostream& operator<<(ostream& out, const memlocation& m)
+		{
+			out << "[" << m.pageid << "," << m.last_accessed << "]";
+			return out;
 		}
 };
 
@@ -59,7 +64,7 @@ memlocation get_page(unsigned int addr)
 	if(pagetable.size() >= PAGE_TABLE_SIZE) // Being paranoid
 	{
 		decltype(pagetable)::iterator it = pagetable.begin();
-		unsigned int temp = (it->second).last_accessed;
+		unsigned long temp = (it->second).last_accessed;
 		
 		//Loop over the pagetable
 		for(auto itr = pagetable.begin(); itr != pagetable.end(); itr ++ )
@@ -79,7 +84,7 @@ memlocation get_page(unsigned int addr)
 				}
 			}
 		}
-		// cout << "[INFO] Removing " << it->first
+		cout << "[INFO] Removing " << it->first << " = " << it->second << endl;
 		//Remove page from table
 		pagetable.erase(it);
 	}

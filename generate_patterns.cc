@@ -45,8 +45,11 @@ void nested_loop_join(Table& inner_table, Table& outer_table)
 
 			for(unsigned int i = 0; i < outer_table.get_records_per_block(); i ++)
 			{
+				access_block(o_block);
+
 				for(unsigned int j = 0; j < inner_table.get_records_per_block(); j ++)
 				{
+					access_block(i_block);
 					//Join Tuples
 					//Assume done
 				}
