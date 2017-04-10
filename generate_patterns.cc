@@ -107,7 +107,7 @@ int main(int argc, char* argv[])
 	nested_loop_join(*inner_table, *outer_table);
 
 	//print accesses
-	cout << accesses.size() << " " << 1500 << endl;
+	cout << accesses.size() << " " << (project.get_starting_block() + project.get_numblocks() - 1) << endl;
 	for(unsigned int i = 0; i < accesses.size(); i ++) cout << accesses[i] << " ";
 	cout << endl;
 	return 0;

@@ -42,7 +42,7 @@ memlocation access_page_from_disk(int addr)
 {
 	//1-based indexing
 	addr --;
-	if(addr < 0 || addr >= static_cast<int>(disk.size())) throw 0;
+	if(addr < 0 || addr >= static_cast<int>(disk.size())) {cerr << "SEGFAULT: Accessing page " << addr + 1 << endl;throw 0;}
 	num_page_faults ++;
 	return disk[addr];  
 }
@@ -84,7 +84,7 @@ memlocation get_page(unsigned int addr)
 				}
 			}
 		}
-		cout << "[INFO] Removing " << it->first << " = " << it->second << endl;
+		//cout << "[INFO] Removing " << it->first << " = " << it->second << endl;
 		//Remove page from table
 		pagetable.erase(it);
 	}
