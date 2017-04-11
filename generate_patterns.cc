@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+
 using namespace std;
 
 vector<unsigned int> accesses;
@@ -63,9 +64,9 @@ void nested_loop_join(Table& inner_table, Table& outer_table)
 int main(int argc, char* argv[])
 {
 	//Table Objects
-	Table employee(1,1000,10000);
-	Table department(1001,100,1000);
-	Table project(1101,500,5000);
+	Table employee(1, 1000, 10000);
+	Table department(1001, 100, 1000);
+	Table project(1101, 500, 5000);
 	if(argc < 3) {
 		cerr << "Usage: " << argv[0] << " <<inner_table>> <<outer_table>>" << endl;
 		cerr << "tables are specified as employee -> 0 , department -> 1, project -> 2" << endl;
@@ -83,26 +84,26 @@ int main(int argc, char* argv[])
 	Table* outer_table = nullptr;
 	switch(it)
 	{
-		case 0:inner_table = &employee;break;
-		case 1:inner_table = &department;break;
-		case 2:inner_table = &project;break;
+		case 0: inner_table = &employee;break;
+		case 1: inner_table = &department;break;
+		case 2: inner_table = &project;break;
 		default:
 			cerr << "[ERROR] Invalid code for Inner Table" << endl;
 			exit(3);
 	}
 	switch(ot)
 	{
-		case 0:outer_table = &employee;break;
-		case 1:outer_table = &department;break;
-		case 2:outer_table = &project;break;
+		case 0: outer_table = &employee;break;
+		case 1: outer_table = &department;break;
+		case 2: outer_table = &project;break;
 		default:
 			cerr << "[ERROR] Invalid code for Outer Table" << endl;
 			exit(3);
 	}
-	
+
 	//Clear Accesses
 	accesses.clear();
-	
+
 	//run nested-loop
 	nested_loop_join(*inner_table, *outer_table);
 

@@ -1,15 +1,18 @@
 #include <iostream>
 #include <map>
 #include <vector>
+
 using namespace std;
+
 enum POLICY {LRU, MRU};
 
 POLICY replacement_policy;
 unsigned int num_page_faults = 0;
 unsigned int moment = 0;
 unsigned int PAGE_TABLE_SIZE = 0;
+
 //Memlocation class
-class memlocation 
+class memlocation
 {
 	public:
 		unsigned int pageid;
@@ -18,7 +21,7 @@ class memlocation
 		memlocation(const memlocation& m) : pageid(m.pageid), last_accessed(m.last_accessed) {}
 		memlocation(unsigned int pageid_p, unsigned int last_accessed_p) : pageid(pageid_p), last_accessed(last_accessed_p) {}
 		bool operator<(const memlocation& a)
-		{	
+		{
 			return last_accessed < a.last_accessed;
 		}
 		friend ostream& operator<<(ostream& out, const memlocation& m)
@@ -44,7 +47,7 @@ memlocation access_page_from_disk(int addr)
 	addr --;
 	if(addr < 0 || addr >= static_cast<int>(disk.size())) {cerr << "SEGFAULT: Accessing page " << addr + 1 << endl;throw 0;}
 	num_page_faults ++;
-	return disk[addr];  
+	return disk[addr];
 }
 
 //The Page table
@@ -65,7 +68,7 @@ memlocation get_page(unsigned int addr)
 	{
 		decltype(pagetable)::iterator it = pagetable.begin();
 		unsigned long temp = (it->second).last_accessed;
-		
+
 		//Loop over the pagetable
 		for(auto itr = pagetable.begin(); itr != pagetable.end(); itr ++ )
 		{
